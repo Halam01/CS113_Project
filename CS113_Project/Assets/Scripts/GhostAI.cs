@@ -7,7 +7,7 @@ public class GhostAI : MonoBehaviour {
     bool on_hit = false;
     double range = 10.0;
     double angle = 15.0;
-    float moveSpeed = 0.3f;
+    float moveSpeed = 0.1f;
 
     // Update is called once per frame
     void Update() {
@@ -21,7 +21,7 @@ public class GhostAI : MonoBehaviour {
             //transform.Rotate(0, Time.deltaTime * 30, 0, Space.Self);
             // transform.Translate(transform.forward * 100 * Time.deltaTime);
             transform.localPosition = Vector3.Lerp(transform.localPosition, transform.localPosition + new Vector3(0, 0, 100), Time.deltaTime * moveSpeed);
-            on_hit = true;
+           // on_hit = true;
         }
     }
 
