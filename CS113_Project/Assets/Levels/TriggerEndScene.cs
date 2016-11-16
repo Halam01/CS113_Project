@@ -5,10 +5,11 @@ public class TriggerEndScene : MonoBehaviour {
 
     void OnTriggerEnter(Collider Col)
     {
-        print("hello");
-        if(Col.gameObject.tag == "Player")
+        print("Moving to floor3");
+        if (Col.gameObject.tag == "Player")
         {
-            Application.LoadLevel("Scene3");
+            //Application.LoadLevel("Scene3");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Scene3");
         }
     }
 }
