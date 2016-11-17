@@ -4,12 +4,15 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class FieldOfView : MonoBehaviour {
+public class FieldOfView : MonoBehaviour
+{
 
+
+    public bool on;
     public float moveSpeed = 0.6f;
 
     public float viewRadius;
-    [Range(0,360)]
+    [Range(0, 360)]
     public float viewAngle;
 
     public LayerMask targetMask;
@@ -30,6 +33,7 @@ public class FieldOfView : MonoBehaviour {
         viewMesh.name = "View Mesh";
         viewMeshFilter.mesh = viewMesh;
         StartCoroutine("FindTargetsWithDelay", .2f);
+        on = true;
     }
 
     IEnumerator FindTargetsWithDelay(float delay)
@@ -48,19 +52,24 @@ public class FieldOfView : MonoBehaviour {
 
     void FindVisibleTargets()
     {
-        visibleTargets.Clear();
-        Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
-
-        for(int i = 0; i < targetsInViewRadius.Length; i++)
+        if (on)
         {
-            Transform target = targetsInViewRadius[i].transform;
-            Vector3 dirToTarget = (target.position - transform.position).normalized;
-            if(Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
+            visibleTargets.Clear();
+            Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
+
+            for (int i = 0; i < targetsInViewRadius.Length; i++)
             {
-                float dstToTarget = Vector3.Distance(transform.position, target.position);
-                if(!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
+                Transform target = targetsInViewRadius[i].transform;
+                Vector3 dirToTarget = (target.position - transform.position).normalized;
+                if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
                 {
-                    visibleTargets.Add(target); //affect targets here
+                    float dstToTarget = Vector3.Distance(transform.position, target.position);
+                    if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
+                    {
+                        visibleTargets.Add(target); //affect targets here
+                        target.GetComponent<GhostAI1>().hit = true;
+                        target.GetComponent<GhostAI1>().triggered = true;
+                    }
                 }
             }
         }
@@ -68,56 +77,63 @@ public class FieldOfView : MonoBehaviour {
 
     void DrawFieldOfView()
     {
-        int stepCount = Mathf.RoundToInt(viewAngle * meshResolution);
-        float stepAngleSize = viewAngle / stepCount;
-        List<Vector3> viewPoints = new List<Vector3>();
-        ViewCastInfo oldViewCast = new ViewCastInfo();
-        for (int i = 0; i <= stepCount; i++)
+        if (on)
         {
-            float angle = transform.eulerAngles.y - viewAngle / 2 + stepAngleSize * i;
-            ViewCastInfo newViewCast = ViewCast(angle);
-
-            if(i > 0)
+            int stepCount = Mathf.RoundToInt(viewAngle * meshResolution);
+            float stepAngleSize = viewAngle / stepCount;
+            List<Vector3> viewPoints = new List<Vector3>();
+            ViewCastInfo oldViewCast = new ViewCastInfo();
+            for (int i = 0; i <= stepCount; i++)
             {
-                bool edgeDstThresholdExceeded = Mathf.Abs(oldViewCast.dst - newViewCast.dst) > edgeDistanceThreshold;
-                if (oldViewCast.hit != newViewCast.hit || (oldViewCast.hit && newViewCast.hit && edgeDstThresholdExceeded))
+                float angle = transform.eulerAngles.y - viewAngle / 2 + stepAngleSize * i;
+                ViewCastInfo newViewCast = ViewCast(angle);
+
+                if (i > 0)
                 {
-                    EdgeInfo edge = FindEdge(oldViewCast, newViewCast);
-                    if(edge.pointA != Vector3.zero)
+                    bool edgeDstThresholdExceeded = Mathf.Abs(oldViewCast.dst - newViewCast.dst) > edgeDistanceThreshold;
+                    if (oldViewCast.hit != newViewCast.hit || (oldViewCast.hit && newViewCast.hit && edgeDstThresholdExceeded))
                     {
-                        viewPoints.Add(edge.pointA);
-                    }
-                    if (edge.pointB != Vector3.zero)
-                    {
-                        viewPoints.Add(edge.pointB);
+                        EdgeInfo edge = FindEdge(oldViewCast, newViewCast);
+                        if (edge.pointA != Vector3.zero)
+                        {
+                            viewPoints.Add(edge.pointA);
+                        }
+                        if (edge.pointB != Vector3.zero)
+                        {
+                            viewPoints.Add(edge.pointB);
+                        }
                     }
                 }
+
+
+                viewPoints.Add(newViewCast.point);
+                oldViewCast = newViewCast;
             }
 
+            int vertexCount = viewPoints.Count + 1;
+            Vector3[] vertices = new Vector3[vertexCount];
+            int[] triangles = new int[(vertexCount - 2) * 3];
 
-            viewPoints.Add(newViewCast.point);
-            oldViewCast = newViewCast;
-        }
-
-        int vertexCount = viewPoints.Count + 1;
-        Vector3[] vertices = new Vector3[vertexCount];
-        int[] triangles = new int[(vertexCount - 2) * 3];
-
-        vertices[0] = Vector3.zero;
-        for (int i = 0; i < vertexCount - 1; i++)
-        {
-            vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]);
-            if (i < vertexCount - 2)
+            vertices[0] = Vector3.zero;
+            for (int i = 0; i < vertexCount - 1; i++)
             {
-                triangles[i * 3] = 0;
-                triangles[i * 3 + 1] = i + 1;
-                triangles[i * 3 + 2] = i + 2;
+                vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]);
+                if (i < vertexCount - 2)
+                {
+                    triangles[i * 3] = 0;
+                    triangles[i * 3 + 1] = i + 1;
+                    triangles[i * 3 + 2] = i + 2;
+                }
             }
+            viewMesh.Clear();
+            viewMesh.vertices = vertices;
+            viewMesh.triangles = triangles;
+            viewMesh.RecalculateNormals();
         }
-        viewMesh.Clear();
-        viewMesh.vertices = vertices;
-        viewMesh.triangles = triangles;
-        viewMesh.RecalculateNormals();
+        else
+        {
+            viewMesh.Clear();
+        }
     }
 
     EdgeInfo FindEdge(ViewCastInfo minViewCast, ViewCastInfo maxViewCast)
@@ -127,7 +143,7 @@ public class FieldOfView : MonoBehaviour {
         Vector3 minPoint = Vector3.zero;
         Vector3 maxPoint = Vector3.zero;
 
-        for(int i = 0; i < edgeResolveIterations; i++)
+        for (int i = 0; i < edgeResolveIterations; i++)
         {
             float angle = (minAngle + maxAngle) / 2;
             ViewCastInfo newViewCast = ViewCast(angle);
@@ -161,7 +177,7 @@ public class FieldOfView : MonoBehaviour {
         }
     }
 
-	public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
+    public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
     {
         if (!angleIsGlobal)
         {

@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour {
     public float moveSpeed;
     public Rigidbody rdgBdy;
     private Vector3 input;
-    private float maxSpeed = 15f;
+    private float maxSpeed = 50f; //upped from 15f for testing purposes
 
     // Use this for initialization
     void Start() {

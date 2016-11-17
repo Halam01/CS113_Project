@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FlashLightController : MonoBehaviour {
+public class FlashLightController : MonoBehaviour
+{
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.F))
         {
             if (GetComponent<Light>().enabled == false)
@@ -14,6 +16,17 @@ public class FlashLightController : MonoBehaviour {
             else
             {
                 GetComponent<Light>().enabled = false;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (GameObject.Find("Player").GetComponent<FieldOfView>().on == false)
+            {
+                GameObject.Find("Player").GetComponent<FieldOfView>().on = true;
+            }
+            else
+            {
+                GameObject.Find("Player").GetComponent<FieldOfView>().on = false;
             }
         }
 
