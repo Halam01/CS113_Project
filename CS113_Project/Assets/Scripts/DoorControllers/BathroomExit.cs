@@ -64,6 +64,6 @@ public class BathroomExit : MonoBehaviour {
 
     void setActive()
     {
-        activated = true; //used by the LROpenClose script to 'activate' the door
+        activated = true; //used by the BROpenClose script to 'activate' the door
     }   
 }

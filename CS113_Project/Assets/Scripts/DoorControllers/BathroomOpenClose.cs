@@ -20,7 +20,7 @@ public class BathroomOpenClose : MonoBehaviour
             if (BRExitScript != null)
                 BRExitScript.SendMessage("setActive"); //close the door
             else
-                print("problemo");
+                print("Bathroom door disabled");
         }
         if (Col.gameObject.transform.position.z > transform.position.z) //close door forever if player is on left side
             BRExitScript = null;
@@ -31,10 +31,10 @@ public class BathroomOpenClose : MonoBehaviour
         print("boutta open BR door");
         if (Col.gameObject.tag == "Player")
         {
-            if (BRExitScript != null) //gotta make sure that the LRExitScript isn't null, otherwise ERROR
+            if (BRExitScript != null) //gotta make sure that the BRExitScript isn't null, otherwise ERROR
                 BRExitScript.SendMessage("setActive");
             else
-                print("problemo");
+                print("Bathroom door disabled");
         }
     }
 }

@@ -20,7 +20,7 @@ public class LROpenClose : MonoBehaviour
             if (LRExitScript != null)
                 LRExitScript.SendMessage("setActive"); //close the door
             else
-                print("problemo");
+                print("LR door disabled");
         }
         if(Col.gameObject.transform.position.x < transform.position.x) //close door forever if player is on left side
             LRExitScript = null;
@@ -34,7 +34,7 @@ public class LROpenClose : MonoBehaviour
             if (LRExitScript != null) //gotta make sure that the LRExitScript isn't null, otherwise ERROR
                 LRExitScript.SendMessage("setActive");
             else
-                print("problemo");
+                print("LR door disabled");
         }
     }
 }
