@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LRExit : MonoBehaviour {
+public class BathroomController : MonoBehaviour {
+
     bool closed;
     Vector3 closedPos, openPos;
 
@@ -12,19 +13,20 @@ public class LRExit : MonoBehaviour {
     int lerp_i;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         closed = true;
 
         //The vectors for the open and closed door positions
-        closedPos = new Vector3(-14, 0, -47);
-        openPos = new Vector3(-16, 0, -49);
+        closedPos = new Vector3(-20, 0, -26);
+        openPos = new Vector3(-22, 0, -24);
 
         activated = false;
         midanim = false;
         lerp_count = new float[] { 0.0f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f };
         lerp_i = 0;
     }
-	//Update that gradually opens the door
+    //Update that gradually opens the door
     void Update()
     {
         if (midanim) //door in motion
@@ -33,7 +35,7 @@ public class LRExit : MonoBehaviour {
             {
                 lerp_i++;
                 transform.localPosition = Vector3.Lerp(closedPos, openPos, lerp_count[lerp_i]); //move to next position in 'gradient'
-                transform.Rotate(0, -10, 0); //rotate the door slightly to give it swing
+                transform.Rotate(0, -9, 0); //rotate the door slightly to give it swing
                 if (lerp_i == 9) //now the door should be fully opened
                 {
                     closed = false; //Now the door is open, no longer moving, and not activated
@@ -45,7 +47,7 @@ public class LRExit : MonoBehaviour {
             {
                 lerp_i--;
                 transform.localPosition = Vector3.Lerp(closedPos, openPos, lerp_count[lerp_i]);
-                transform.Rotate(0, 10, 0);
+                transform.Rotate(0, 9, 0);
                 if (lerp_i == 0)
                 {
                     closed = true;
@@ -54,7 +56,7 @@ public class LRExit : MonoBehaviour {
                 }
             }
         }
-        else if (activated)//Input.GetKeyDown(KeyCode.L))
+        else if (activated)
         {
             midanim = true;
         }
@@ -62,29 +64,6 @@ public class LRExit : MonoBehaviour {
 
     void setActive()
     {
-        activated = true; //used by the LROpenClose script to 'activate' the door
-    }
-	
-    // Update with binary door opening, OBSELETE NOW THAT ANIMATED OPENING WORKS
-	/*void Update () {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            if (closed == true)
-            {
-                print("Opened the door");
-                closed = false;
-                //Works, but is 0-100 closed-open, wish it was a more gradual open
-                transform.localPosition = Vector3.Lerp(transform.localPosition, openPos, 1f);
-                transform.Rotate(openRot);
-            }
-            else
-            {
-                print("Closed the door");
-                closed = true;
-                transform.localPosition = Vector3.Lerp(transform.localPosition, closedPos, 1f);
-                transform.Rotate(closedRot);
-            }
-        }
-    }
-    */
+        activated = true; //used by the BROpenClose script to 'activate' the door
+    }   
 }

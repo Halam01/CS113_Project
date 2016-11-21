@@ -1,29 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LROpenClose : MonoBehaviour
+public class LRActivator : MonoBehaviour
 {
-    private Component LRExitScript;
+    private Component LRC;
     void Start()
     {
-        LRExitScript = GameObject.Find("LivingRoomExit").GetComponent("LRExit"); //get a reference to the script that opens the door
-        if (LRExitScript != null)
-            print("Found LRExit.cs");
+        LRC = GameObject.Find("LivingRoomDoor").GetComponent("LRController"); //get a reference to the script that opens the door
+        if (LRC != null)
+            print("Found LRC.cs");
         else
-            print("Could not find LRE.cs");
+            print("Could not find LRC.cs");
     }
     void OnTriggerExit(Collider Col)
     {
         print("boutta close LR door");
         if (Col.gameObject.tag == "Player") //if the Player exited the box
         {
-            if (LRExitScript != null)
-                LRExitScript.SendMessage("setActive"); //close the door
+            if (LRC != null)
+                LRC.SendMessage("setActive"); //close the door
             else
                 print("LR door disabled");
         }
         if(Col.gameObject.transform.position.x < transform.position.x) //close door forever if player is on left side
-            LRExitScript = null;
+            LRC = null;
     }
 
     void OnTriggerEnter(Collider Col)
@@ -31,8 +31,8 @@ public class LROpenClose : MonoBehaviour
         print("boutta open LR door");
         if (Col.gameObject.tag == "Player")
         {
-            if (LRExitScript != null) //gotta make sure that the LRExitScript isn't null, otherwise ERROR
-                LRExitScript.SendMessage("setActive");
+            if (LRC != null) //gotta make sure that the LRC isn't null, otherwise ERROR
+                LRC.SendMessage("setActive");
             else
                 print("LR door disabled");
         }

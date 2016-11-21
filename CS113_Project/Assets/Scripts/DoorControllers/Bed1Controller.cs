@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BathroomExit : MonoBehaviour {
+public class Bed1Controller : MonoBehaviour {
 
     bool closed;
     Vector3 closedPos, openPos;
@@ -18,8 +18,8 @@ public class BathroomExit : MonoBehaviour {
         closed = true;
 
         //The vectors for the open and closed door positions
-        closedPos = new Vector3(-20, 0, -29);
-        openPos = new Vector3(-22, 0, -27);
+        closedPos = new Vector3(-10, 0, (float)(-8.5));
+        openPos = new Vector3(-8, 0, (float)(-6.5));
 
         activated = false;
         midanim = false;
@@ -65,5 +65,5 @@ public class BathroomExit : MonoBehaviour {
     void setActive()
     {
         activated = true; //used by the BROpenClose script to 'activate' the door
-    }   
+    }
 }
