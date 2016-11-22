@@ -62,9 +62,27 @@ public class LRController : MonoBehaviour {
         }
     }
 
-    void setActive()
-    //used by the LROpenClose script to 'activate' the door
+    void close_Door()
     {
-        activated = true;
+        if (!closed)
+        {
+            activated = true;
+        }
+        else
+        {
+            print("Door already closed.");
+        }
+    }
+
+    void open_Door()
+    {
+        if (closed)
+        {
+            activated = true;
+        }
+        else
+        {
+            print("Door already open.");
+        }
     }
 }

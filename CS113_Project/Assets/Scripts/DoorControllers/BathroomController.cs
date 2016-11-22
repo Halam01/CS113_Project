@@ -62,8 +62,27 @@ public class BathroomController : MonoBehaviour {
         }
     }
 
-    void setActive()
+    void close_Door()
     {
-        activated = true; //used by the BROpenClose script to 'activate' the door
-    }   
+        if (!closed)
+        {
+            activated = true;
+        }
+        else
+        {
+            print("Door already closed.");
+        }
+    }
+
+    void open_Door()
+    {
+        if (closed)
+        {
+            activated = true;
+        }
+        else
+        {
+            print("Door already open.");
+        }
+    }
 }

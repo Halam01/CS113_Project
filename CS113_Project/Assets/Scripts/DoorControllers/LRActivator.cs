@@ -18,7 +18,7 @@ public class LRActivator : MonoBehaviour
         if (Col.gameObject.tag == "Player") //if the Player exited the box
         {
             if (LRC != null)
-                LRC.SendMessage("setActive"); //close the door
+                LRC.SendMessage("close_Door"); //close the door
             else
                 print("LR door disabled");
         }
@@ -29,10 +29,10 @@ public class LRActivator : MonoBehaviour
     void OnTriggerEnter(Collider Col)
     {
         print("boutta open LR door");
-        if (Col.gameObject.tag == "Player")
+        if (Col.gameObject.tag == "Ghost")
         {
             if (LRC != null) //gotta make sure that the LRC isn't null, otherwise ERROR
-                LRC.SendMessage("setActive");
+                LRC.SendMessage("open_Door");
             else
                 print("LR door disabled");
         }

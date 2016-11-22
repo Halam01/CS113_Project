@@ -18,21 +18,21 @@ public class BathroomActivator : MonoBehaviour
         {
             print("boutta close BR door");
             if (BRC != null)
-                BRC.SendMessage("setActive"); //close the door
+                BRC.SendMessage("close_Door"); //close the door
             else
                 print("Bathroom door disabled");
         }
-        if (Col.gameObject.transform.position.z > transform.position.z) //close door forever if player is on left side
+        if (Col.gameObject.transform.position.z > transform.position.z) //close door forever if player is on top side
             BRC = null;
     }
 
     void OnTriggerEnter(Collider Col)
     {
         print("boutta open BR door");
-        if (Col.gameObject.tag == "Player")
+        if (Col.gameObject.tag == "Ghost")
         {
             if (BRC != null) //gotta make sure that the BRExitScript isn't null, otherwise ERROR
-                BRC.SendMessage("setActive");
+                BRC.SendMessage("open_Door");
             else
                 print("Bathroom door disabled");
         }

@@ -19,7 +19,7 @@ public class Bed1Activator : MonoBehaviour {
         {
             print("boutta close BR1 door");
             if (BR1C != null)
-                BR1C.SendMessage("setActive"); //close the door
+                BR1C.SendMessage("close_Door"); //close the door
             else
                 print("Bedroom1 door disabled");
         }
@@ -30,10 +30,10 @@ public class Bed1Activator : MonoBehaviour {
     void OnTriggerEnter(Collider Col)
     {
         print("boutta open BR1 door");
-        if (Col.gameObject.tag == "Player" && Col.gameObject.transform.position.x < transform.position.x) //only open if player enters from right side.
+        if (Col.gameObject.tag == "Ghost" && Col.gameObject.transform.position.x < transform.position.x) //only open if player enters from right side.
         {
             if (BR1C != null) //gotta make sure that the BRExitScript isn't null, otherwise ERROR
-                BR1C.SendMessage("setActive");
+                BR1C.SendMessage("open_Door");
             else
                 print("Bedroom1 door disabled");
         }
