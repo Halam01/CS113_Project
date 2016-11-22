@@ -66,9 +66,11 @@ public class FieldOfView : MonoBehaviour
                     float dstToTarget = Vector3.Distance(transform.position, target.position);
                     if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
                     {
-                        visibleTargets.Add(target); //affect targets here
-                        target.GetComponent<GhostAI1>().hit = true;
-                        target.GetComponent<GhostAI1>().triggered = true;
+                        if (target.tag == "Ghost")
+                        {
+                            visibleTargets.Add(target); //affect targets here
+                            target.GetComponent<GhostMovement>().hit = true;
+                        }
                     }
                 }
             }

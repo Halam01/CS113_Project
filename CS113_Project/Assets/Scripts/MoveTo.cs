@@ -9,12 +9,12 @@ public class MoveTo : MonoBehaviour {
     void Start()
     {
       agent = GetComponent<NavMeshAgent>();
-      agent.destination = goal.position;
+      
 
     }
 
     // Update is called once per frame
     void Update () {
-
+        agent.destination = goal.position;
     }
 }
