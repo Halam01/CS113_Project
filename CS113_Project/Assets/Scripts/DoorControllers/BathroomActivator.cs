@@ -14,23 +14,24 @@ public class BathroomActivator : MonoBehaviour
     }
     void OnTriggerExit(Collider Col)
     {
-        if (Col.gameObject.tag == "Player") //if the Player exited the box
+        if (Col.gameObject.tag == "Player" && Col.gameObject.transform.position.z > transform.position.z) //if the Player exited the box
         {
             print("boutta close BR door");
             if (BRC != null)
+            {
                 BRC.SendMessage("close_Door"); //close the door
+                BRC = null;
+            }
             else
                 print("Bathroom door disabled");
         }
-        if (Col.gameObject.transform.position.z > transform.position.z) //close door forever if player is on top side
-            BRC = null;
     }
 
     void OnTriggerEnter(Collider Col)
     {
-        print("boutta open BR door");
         if (Col.gameObject.tag == "Ghost")
         {
+            print("boutta open BR door");
             if (BRC != null) //gotta make sure that the BRExitScript isn't null, otherwise ERROR
                 BRC.SendMessage("open_Door");
             else

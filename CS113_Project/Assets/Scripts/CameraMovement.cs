@@ -4,11 +4,12 @@ using System.Collections;
 public class CameraMovement : MonoBehaviour {
 
     public GameObject player;     
-    private Vector3 offset;         
+    //private Vector3 offset;         
     void Start()
     {
         //Calculate and store the offset value by getting the distance between the player's position and camera's position.
-        offset = transform.position - player.transform.position;
+        //offset = transform.position - player.transform.position;
+        //removed offset variable so that way the camera remains at a fixed height of 10
         
     }
 

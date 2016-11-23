@@ -14,23 +14,24 @@ public class LRActivator : MonoBehaviour
     }
     void OnTriggerExit(Collider Col)
     {
-        print("boutta close LR door");
-        if (Col.gameObject.tag == "Player") //if the Player exited the box
+        if (Col.gameObject.tag == "Player" && Col.gameObject.transform.position.x < transform.position.x) //if the Player exited the box
         {
+            print("boutta close LR door");
             if (LRC != null)
+            {
                 LRC.SendMessage("close_Door"); //close the door
+                LRC = null;
+            }
             else
                 print("LR door disabled");
         }
-        if(Col.gameObject.transform.position.x < transform.position.x) //close door forever if player is on left side
-            LRC = null;
     }
 
     void OnTriggerEnter(Collider Col)
     {
-        print("boutta open LR door");
         if (Col.gameObject.tag == "Ghost")
         {
+            print("boutta open LR door");
             if (LRC != null) //gotta make sure that the LRC isn't null, otherwise ERROR
                 LRC.SendMessage("open_Door");
             else
