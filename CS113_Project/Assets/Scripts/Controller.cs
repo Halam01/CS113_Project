@@ -6,7 +6,7 @@ using System.Collections;
 public class Controller : MonoBehaviour {
 
     public float moveSpeed = 6;
-    Rigidbody rigidbody;
+    private new Rigidbody rigidbody; //added 'new' to remove a warning, not sure what the issue was.
     Camera viewCamera;
     Vector3 velocity;
 
