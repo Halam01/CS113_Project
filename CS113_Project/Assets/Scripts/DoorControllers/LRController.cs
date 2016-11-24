@@ -11,6 +11,8 @@ public class LRController : MonoBehaviour {
     float[] lerp_count; //array of float values (percentages, essentially)
     int lerp_i;
 
+    
+
     void Start ()
     // Use this for initialization
     {
@@ -29,7 +31,7 @@ public class LRController : MonoBehaviour {
     void Update()
     //Update override that gradually opens the door
     {
-        if (midanim) //door in motion
+            if (midanim) //door in motion
         {
             if (closed)  //in the middle of opening the door
             {
@@ -85,4 +87,5 @@ public class LRController : MonoBehaviour {
             print("Door already open.");
         }
     }
+
 }
