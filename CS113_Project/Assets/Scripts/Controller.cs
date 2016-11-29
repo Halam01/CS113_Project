@@ -11,7 +11,7 @@ public class Controller : MonoBehaviour {
     Vector3 velocity;
 
     Collider pick_up = null;
-    int pressed = -1;
+    bool holding = false;
 
 
     // Use this for initialization
@@ -20,33 +20,79 @@ public class Controller : MonoBehaviour {
         viewCamera = Camera.main;
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown("space"))
-        {
-            pressed++;
-            pressed %= 2;
-            if (pressed == 0)
-            {
-                if (pick_up != null)
-                {
-                    if (pick_up.gameObject.CompareTag("Pick Up"))
-                    {
-                        pick_up.gameObject.transform.parent = transform;
-                    }
-                }
-            }else
-            {
-                if (pick_up != null)
-                {
-                    if (pick_up.gameObject.CompareTag("Pick Up"))
-                    {
-                        pick_up.gameObject.transform.parent = null;
-                    }
-                }
-            }
 
+    void pickup()
+    {
+        if (holding || pick_up == null)
+        { print("Pick up failed: already holding, or no object to pick up."); }
+        else
+        {
+            if (pick_up.gameObject.CompareTag("Pick Up"))
+            {
+                //picked up an object.
+                pick_up.gameObject.transform.parent = transform;
+                holding = true;
+            }
+        }
+    }
+
+    void drop()
+    {
+        if (!holding || pick_up == null)
+        { print("Drop failed: not holding an object"); }
+        else
+        {
+            if (pick_up.gameObject.CompareTag("Pick Up"))
+            {
+                //dropped up an object.
+                pick_up.gameObject.transform.parent = null;
+                holding = false;
+            }
+        }
+    }
+
+
+    // Update is called once per frame
+    void Update () {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            print("pressed space");
+            if (!holding) //not holding an object, want to pick up
+            {
+                pickup();
+            }
+            else //holding an object, want to drop
+            {
+                drop();
+            }
+            //    print("pressed space");
+            //    pressed++;
+            //    pressed %= 2;
+            //    if (pressed == 0)
+            //    {
+            //        if (pick_up != null)
+            //        {
+            //            print("picking up");
+            //            if (pick_up.gameObject.CompareTag("Pick Up"))
+            //            {
+            //                pick_up.gameObject.transform.parent = transform;
+            //            }
+            //        }
+            //        else
+            //            print("pick-up == null");
+            //    } else
+            //    {
+            //        if (pick_up != null)
+            //        {
+            //            if (pick_up.gameObject.CompareTag("Pick Up"))
+            //            {
+            //                print("putting down");
+            //                pick_up.gameObject.transform.parent = null;
+            //            }
+            //            else
+            //                print("pickup not pickup");
+            //        }
+            //    }
         }
         Vector3 mousePos = viewCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, viewCamera.transform.position.y));
         transform.LookAt(mousePos + Vector3.up * transform.position.y);
@@ -60,11 +106,15 @@ public class Controller : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        pick_up = other;
+        //print("Player enter trigger.");
+        if (other.gameObject.CompareTag("Pick Up") && !(holding))
+            pick_up = other;
     }
     
     void OnTriggerExit(Collider other)
     {
-        pick_up = null;
+        //print("Player exit trigger.");
+        if(other.gameObject.CompareTag("Pick Up") && !(holding))
+           pick_up = null;
     }
 }

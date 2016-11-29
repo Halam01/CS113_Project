@@ -29,7 +29,7 @@ public class LRActivator : MonoBehaviour
 
     void OnTriggerEnter(Collider Col)
     {
-        if (Col.gameObject.tag == "Ghost")
+        if (Col.gameObject.CompareTag("Ghost"))
         {
             print("boutta open LR door");
             if (LRC != null) //gotta make sure that the LRC isn't null, otherwise ERROR
