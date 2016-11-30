@@ -31,7 +31,7 @@ public class Bed1Activator : MonoBehaviour {
 
     void OnTriggerEnter(Collider Col)
     {
-        if (Col.gameObject.CompareTag("Pick Up") && Col.gameObject.name == "LRKey") //only open if player enters from left side.
+        if (Col.gameObject.CompareTag("Pick Up") && Col.gameObject.name == "BedKey") //only open if player enters from left side.
         {
             print("boutta open BR1 door");
             if (player != null)
