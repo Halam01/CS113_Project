@@ -5,27 +5,52 @@ public class GameControl : MonoBehaviour {
 
     public static GameControl control;
 
-    public float health;
-    public float experience;
 
-	// Use this for initialization
-	void Awake () {
+    public struct PlateDetector
+    {
+        public string name;
+        public bool placed;
+    }
+
+    public PlateDetector[] plates;
+    public bool all_set = false;
+
+
+    // Use this for initialization
+    void Awake () {
         if(control == null)
         {
-            DontDestroyOnLoad(gameObject);
-            control = this;
+           DontDestroyOnLoad(gameObject);
+           control = this;
         }
         else if (control != this)
         {
             Destroy(gameObject);
-        }
-        
+        }  
 	}
 	
-	void OnGUI()
+    void Start()
     {
-        //temp variables, just to see how saving data works between scenes, can access these variables via control.method/variable
-        GUI.Label(new Rect(10, 10, 100, 30), "Health: " + health);
-        GUI.Label(new Rect(10, 40, 100, 30), "Experience: " + experience);
+        plates = new PlateDetector[6];
+        plates[0].name = "Normal Plate1";
+        plates[1].name = "Normal Plate2";
+        plates[2].name = "Normal Plate3";
+        plates[3].name = "Veggie Plate1";
+        plates[4].name = "Veggie Plate2";
+        plates[5].name = "NC Plate";
+    }
+
+    void Update()
+    {
+        all_set = true;
+        for(int i = 0; i < 6; i++)
+        {
+            if (plates[i].placed == false)
+            {
+                //print(plates[i].name);
+                all_set = false;
+            }
+        }
+        //print(all_set);
     }
 }

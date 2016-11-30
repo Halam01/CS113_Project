@@ -31,6 +31,7 @@ public class Controller : MonoBehaviour {
             {
                 //picked up an object.
                 pick_up.gameObject.transform.parent = transform;
+                pick_up.gameObject.transform.position = transform.position + transform.forward * 1.2f;
                 holding = true;
             }
         }

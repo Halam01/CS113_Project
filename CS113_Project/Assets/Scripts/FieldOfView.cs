@@ -71,6 +71,11 @@ public class FieldOfView : MonoBehaviour
                             visibleTargets.Add(target); //affect targets here
                             target.GetComponent<GhostMovement>().hit = true;
                         }
+                        if (target.tag == "MomGhost" && GameControl.control.all_set == true)
+                        {
+                            visibleTargets.Add(target); //affect targets here
+                            target.GetComponent<GhostMovement>().hit = true;
+                        }
                     }
                 }
             }
