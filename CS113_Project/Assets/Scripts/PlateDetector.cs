@@ -25,11 +25,14 @@ public class PlateDetector : MonoBehaviour {
     void OnTriggerExit(Collider plate)
     {
         //print("Plate removed");
-        for (int i = 0; i < 3; i++)
+        if (plate.gameObject.name == gameObject.tag)
         {
-            if (GameControl.control.plates[i].name == plate.gameObject.name && GameControl.control.plates[i].placed > 0)
+            for (int i = 0; i < 3; i++)
             {
-                GameControl.control.plates[i].placed -= 1;
+                if (GameControl.control.plates[i].name == plate.gameObject.name && GameControl.control.plates[i].placed > 0)
+                {
+                    GameControl.control.plates[i].placed -= 1;
+                }
             }
         }
     }

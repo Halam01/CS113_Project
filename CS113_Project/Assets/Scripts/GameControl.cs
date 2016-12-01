@@ -48,9 +48,9 @@ public class GameControl : MonoBehaviour
 
     void Update()
     {
-        //print(plates[0].placed);
-        //print(plates[1].placed);
-        //print(plates[2].placed);
+        print(plates[0].placed);
+        print(plates[1].placed);
+        print(plates[2].placed);
         if (plates[0].placed == 3 && plates[1].placed == 2 && plates[2].placed == 1)
         {
             all_set = true;
