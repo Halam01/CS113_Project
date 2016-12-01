@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlateDetector : MonoBehaviour {
 
-    void OnTriggerStay(Collider plate)
+    void OnTriggerEnter(Collider plate)
     {
         //print("plate placed");
         //print(plate.gameObject.name);
@@ -11,11 +11,13 @@ public class PlateDetector : MonoBehaviour {
         if (plate.gameObject.name == gameObject.tag)
         {
             //print("Correct plate placed");
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 3; i++)
             {
                 if (GameControl.control.plates[i].name == plate.gameObject.name)
                 {
-                    GameControl.control.plates[i].placed = true;
+                    //print("HERE");
+                        GameControl.control.plates[i].placed += 1;
+                    
                 }
             }
         }
@@ -23,11 +25,11 @@ public class PlateDetector : MonoBehaviour {
     void OnTriggerExit(Collider plate)
     {
         //print("Plate removed");
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 3; i++)
         {
-            if (GameControl.control.plates[i].name == plate.gameObject.name)
+            if (GameControl.control.plates[i].name == plate.gameObject.name && GameControl.control.plates[i].placed > 0)
             {
-                GameControl.control.plates[i].placed = false;
+                GameControl.control.plates[i].placed -= 1;
             }
         }
     }

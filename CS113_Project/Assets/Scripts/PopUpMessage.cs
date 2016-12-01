@@ -4,6 +4,7 @@ using System.Collections;
 public class PopUpMessage : MonoBehaviour {
 
     public bool touched = false;
+    GUIStyle style = new GUIStyle();
 
 	void OnTriggerEnter(Collider col)
     {
@@ -26,7 +27,8 @@ public class PopUpMessage : MonoBehaviour {
     {
         if (touched)
         {
-            GUI.Label(new Rect(Screen.width / 2, Screen.height - 200 , 150, 50), "I need to set the table first!");
+            style.fontSize = 20;
+            GUI.Label(new Rect(Screen.width / 2, Screen.height - 200 , 150, 50), "I need to set the table first!", style);
         }
     }
 }
