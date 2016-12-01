@@ -71,7 +71,7 @@ public class FieldOfView : MonoBehaviour
                             visibleTargets.Add(target); //affect targets here
                             target.GetComponent<GhostMovement>().hit = true;
                         }
-                        if (target.tag == "MomGhost" && GameControl.control.all_set == true)
+                        if (target.tag == "MomGhost"/* && GameControl.control.all_set == true*/) //uncomment for plate-checking
                         {
                             visibleTargets.Add(target); //affect targets here
                             target.GetComponent<GhostMovement>().hit = true;
