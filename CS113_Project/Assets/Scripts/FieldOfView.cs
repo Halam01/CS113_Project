@@ -33,7 +33,7 @@ public class FieldOfView : MonoBehaviour
         viewMesh.name = "View Mesh";
         viewMeshFilter.mesh = viewMesh;
         StartCoroutine("FindTargetsWithDelay", .2f);
-        on = true;
+        on = false;
     }
 
     IEnumerator FindTargetsWithDelay(float delay)
@@ -76,6 +76,7 @@ public class FieldOfView : MonoBehaviour
                             visibleTargets.Add(target); //affect targets here
                             target.GetComponent<GhostMovement>().hit = true;
                         }
+
                     }
                 }
             }

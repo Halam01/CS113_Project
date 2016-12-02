@@ -9,24 +9,24 @@ public class FlashLightController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (GetComponent<Light>().enabled == false)
+            if (GetComponent<Light>().enabled == true)
             {
-                GetComponent<Light>().enabled = true;
+                GetComponent<Light>().enabled = false;
             }
             else
             {
-                GetComponent<Light>().enabled = false;
+                GetComponent<Light>().enabled = true;
             }
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (GameObject.Find("Player").GetComponent<FieldOfView>().on == false)
+            if (GameObject.Find("Player").GetComponent<FieldOfView>().on == true)
             {
-                GameObject.Find("Player").GetComponent<FieldOfView>().on = true;
+                GameObject.Find("Player").GetComponent<FieldOfView>().on = false;
             }
             else
             {
-                GameObject.Find("Player").GetComponent<FieldOfView>().on = false;
+                GameObject.Find("Player").GetComponent<FieldOfView>().on = true;
             }
         }
 

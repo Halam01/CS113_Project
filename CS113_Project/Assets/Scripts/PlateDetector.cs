@@ -5,12 +5,12 @@ public class PlateDetector : MonoBehaviour {
 
     void OnTriggerEnter(Collider plate)
     {
-        print("plate placed");
-        print(plate.gameObject.name);
-        print(gameObject.tag);
+       // print("plate placed");
+        //print(plate.gameObject.name);
+       // print(gameObject.tag);
         if (plate.gameObject.name == gameObject.tag)
         {
-            print("Correct plate placed");
+            //print("Correct plate placed");
             for (int i = 0; i < 3; i++)
             {
                 if (GameControl.control.plates[i].name == plate.gameObject.name)
