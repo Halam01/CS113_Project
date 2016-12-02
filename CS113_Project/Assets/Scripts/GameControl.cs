@@ -40,17 +40,13 @@ public class GameControl : MonoBehaviour
         plates[0].placed = 0;
         plates[1].placed = 0;
         plates[2].placed = 0;
-        /* plates[3].name = "Veggie Plate1";
-         plates[4].name = "Veggie Plate2";
-         plates[5].name = "NC Plate";
-         */
     }
 
     void Update()
     {
-        print(plates[0].placed);
-        print(plates[1].placed);
-        print(plates[2].placed);
+        //print(plates[0].placed);
+        //print(plates[1].placed);
+        //print(plates[2].placed);
         if (plates[0].placed == 3 && plates[1].placed == 2 && plates[2].placed == 1)
         {
             all_set = true;

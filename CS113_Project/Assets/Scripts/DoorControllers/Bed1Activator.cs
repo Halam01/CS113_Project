@@ -26,7 +26,6 @@ public class Bed1Activator : MonoBehaviour {
         //    else
         //        print("Bedroom1 door disabled");
         //}
-
     }
 
     void OnTriggerEnter(Collider Col)
