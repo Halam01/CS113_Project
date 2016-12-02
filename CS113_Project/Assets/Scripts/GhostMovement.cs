@@ -7,6 +7,8 @@ public class GhostMovement : MonoBehaviour
     public Transform goal;
     public int goal_i;
     public bool isCycle;
+    public bool disappearing;
+    public int disappear_count;
     NavMeshAgent agent;
     public bool hit;
     public string ghost_id;
@@ -19,6 +21,7 @@ public class GhostMovement : MonoBehaviour
         if (DestList.Length == 0)
         { print("No destinations given"); }
         GotoNextPoint();
+        disappear_count = 0;
     }
 
     void GotoNextPoint()
@@ -41,11 +44,30 @@ public class GhostMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hit)
+        if (disappearing)
+        {
+            if (hit && agent.remainingDistance < 0.5f) //hit and at hiding spot
+            {
+                disappear_count = 0;
+                GetComponent<MeshRenderer>().enabled = true;
+                GotoNextPoint();
+                print(goal_i);
+            }
+            else if (disappear_count > 75)
+            {
+                GetComponent<MeshRenderer>().enabled = false;
+                hit = false;
+            }
+            if(hit)
+                disappear_count++;
+        }
+        else if (hit)
         {
             hit = false;
             if (agent.remainingDistance < 0.5f) //at the destination
+            {
                 GotoNextPoint();
+            }
         }
 
     }

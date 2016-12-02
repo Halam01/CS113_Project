@@ -70,10 +70,6 @@ public class LRController : MonoBehaviour {
         {
             activated = true;
         }
-        else
-        {
-            print("Door already closed.");
-        }
     }
 
     void open_Door()
@@ -81,10 +77,6 @@ public class LRController : MonoBehaviour {
         if (closed)
         {
             activated = true;
-        }
-        else
-        {
-            print("Door already open.");
         }
     }
 

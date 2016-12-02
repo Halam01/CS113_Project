@@ -9,9 +9,7 @@ public class KitchenActivator : MonoBehaviour
     void Start()
     {
         KC = GameObject.Find("KitchenDoor").GetComponent("KitchenController"); //get a reference to the script that opens the door
-        if (KC != null)
-            print("Found KC.cs");
-        else
+        if (KC == null)
             print("Could not find KC.cs");
     }
 
@@ -22,25 +20,19 @@ public class KitchenActivator : MonoBehaviour
             Col.gameObject.GetComponent<MeshRenderer>().enabled = false;
             Col.gameObject.SetActive(false);
         }
-        //if (Col.gameObject.tag == "Player" && Col.transform.position.z > transform.position.z)
-        //{
-        //    print("boutta close Kitchen door");
-        //    if (KC != null)
-        //        KC.SendMessage("close_Door"); //close the door
-        //    else
-        //        print("Kitchen door disabled");
-        //} //don't really need to close the kitchen door
+        else if (Col.gameObject.tag == "Player" && Col.transform.position.z > transform.position.z)
+        {
+            if (KC != null)
+                KC.SendMessage("close_Door"); //close the door
+        }
     }
 
     void OnTriggerEnter(Collider Col)
     {
         if (Col.gameObject.CompareTag("MomGhost")) //only open if player enters from left side.
         {
-            print("boutta open Kitchen door");
             if (KC != null) //gotta make sure that the BRExitScript isn't null, otherwise ERROR
                 KC.SendMessage("open_Door");
-            else
-                print("Kitchen door disabled");
         }
     }
 }

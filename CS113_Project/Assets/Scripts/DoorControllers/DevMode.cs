@@ -9,8 +9,6 @@ public class DevMode : MonoBehaviour {
         myDoors = GameObject.FindGameObjectsWithTag("Door");
         if (myDoors.Length == 0)
             print("couldn't find doors");
-        else
-            print("found doors");
     }
 	
 	void Update ()

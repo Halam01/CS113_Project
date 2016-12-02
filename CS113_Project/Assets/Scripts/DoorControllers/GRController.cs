@@ -68,10 +68,6 @@ public class GRController : MonoBehaviour
         {
             activated = true;
         }
-        else
-        {
-            print("Door already closed.");
-        }
     }
 
     void open_Door()
@@ -79,10 +75,6 @@ public class GRController : MonoBehaviour
         if (closed)
         {
             activated = true;
-        }
-        else
-        {
-            print("Door already open.");
         }
     }
 }

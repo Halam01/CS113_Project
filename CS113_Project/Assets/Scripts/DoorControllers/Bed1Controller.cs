@@ -67,10 +67,6 @@ public class Bed1Controller : MonoBehaviour {
         {
             activated = true;
         }
-        else
-        {
-            print("Door already closed.");
-        }
     }
 
     void open_Door()
@@ -78,10 +74,6 @@ public class Bed1Controller : MonoBehaviour {
         if (closed)
         {
             activated = true;
-        }
-        else
-        {
-            print("Door already open.");
         }
     }
 }
