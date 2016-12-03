@@ -11,7 +11,8 @@ public class Controller : MonoBehaviour {
     Vector3 velocity;
 
     Collider pick_up = null;
-    bool holding = false;
+    public bool holding = false;
+
 
 
     // Use this for initialization

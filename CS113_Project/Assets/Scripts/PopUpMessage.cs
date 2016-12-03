@@ -12,7 +12,7 @@ public class PopUpMessage : MonoBehaviour {
 
 	void OnTriggerStay(Collider col)
     {
-        if (col.tag == "Player" && GameControl.control.all_set == false && Input.GetKeyUp("space"))
+        if (col.tag == "Player" && GameControl.control.all_set == false && Input.GetKeyUp("space") && col.GetComponent<Controller>().holding == false)
         {
             print("hit");
             touched = true;
@@ -39,7 +39,7 @@ public class PopUpMessage : MonoBehaviour {
             //GUI.Label(new Rect(Screen.width / 2, Screen.height * 0.75f , 150, 50), message, style);
             if (i < texture.Length && i >= 0)
             {
-                GUI.Label(new Rect(0, Screen.height * 0.75f, texture[i].width, texture[i].height), texture[i]);
+                GUI.Label(new Rect(0, Screen.height * 0.75f, Screen.width, texture[i].height), texture[i]);
             }
         }
     }
