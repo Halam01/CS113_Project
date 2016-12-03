@@ -4,11 +4,11 @@ using System.Collections;
 public class MoveTo : MonoBehaviour {
 
     public Transform goal;
-    NavMeshAgent agent;
+    UnityEngine.AI.NavMeshAgent agent;
 
     void Start()
     {
-      agent = GetComponent<NavMeshAgent>();
+      agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
       
 
     }

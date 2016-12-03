@@ -9,13 +9,13 @@ public class GhostMovement : MonoBehaviour
     public bool isCycle;
     public bool disappearing;
     public int disappear_count;
-    NavMeshAgent agent;
+    UnityEngine.AI.NavMeshAgent agent;
     public bool hit;
     public string ghost_id;
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         hit = false;
         goal_i = 0;
         if (DestList.Length == 0)
