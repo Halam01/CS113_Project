@@ -16,7 +16,6 @@ public class GameControl : MonoBehaviour
     public PlateDetector[] plates;
     public bool all_set = false;
 
-
     // Use this for initialization
     void Awake()
     {

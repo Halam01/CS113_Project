@@ -8,3 +8,6 @@ sceneSetups:
 - path: Assets/Levels/Scene1.unity
   isLoaded: 1
   isActive: 1
+- path: Assets/Levels/Victory.unity
+  isLoaded: 0
+  isActive: 0
