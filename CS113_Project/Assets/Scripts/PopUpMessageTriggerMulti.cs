@@ -50,7 +50,8 @@ public class PopUpMessageTriggerMulti : MonoBehaviour {
             //GUI.Label(new Rect(Screen.width / 2, Screen.height * 0.75f , 150, 50), message, style);
             if (i < texture2.Length)
             {
-                GUI.Label(new Rect(0, Screen.height * 0.75f, texture2[i].width, texture2[i].height), texture2[i]);
+                //GUI.Label(new Rect(0, Screen.height * 0.75f, Screen.width, Screen.height * 0.25f), texture2[i]);
+                GUI.DrawTexture(new Rect(0, Screen.height * 0.75f, Screen.width, Screen.height * 0.25f), texture2[i]);
             }
             if (paused == true && Input.GetKeyUp("space"))
             {

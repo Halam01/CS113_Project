@@ -37,7 +37,8 @@ public class PopUpMessageTrigger : MonoBehaviour {
         {
             //style.fontSize = 20;
             //GUI.Label(new Rect(Screen.width / 2, Screen.height * 0.75f , 150, 50), message, style);
-            GUI.Label(new Rect(0, Screen.height * 0.75f, texture2.width, texture2.height), texture2);
+            //GUI.Label(new Rect(0, Screen.height * 0.75f, Screen.width, Screen.height * 0.25f), texture2);
+            GUI.DrawTexture(new Rect(0, Screen.height * 0.75f, Screen.width, Screen.height * 0.25f), texture2);
             if (paused == true && Input.GetKeyDown("space"))
             {
                 paused = false;
