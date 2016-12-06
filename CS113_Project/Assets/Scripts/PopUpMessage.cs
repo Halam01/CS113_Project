@@ -14,9 +14,17 @@ public class PopUpMessage : MonoBehaviour {
     {
         if (col.tag == "Player" && GameControl.control.all_set == false && Input.GetKeyUp("space") && col.GetComponent<Controller>().holding == false)
         {
-            print("hit");
-            touched = true;
-            i += 1;
+            if (touched)
+            {
+                touched = false;
+                i -= 1;
+            }
+            else
+            {
+                print("hit");
+                touched = true;
+                i += 1;
+            }
         }
     }
 
