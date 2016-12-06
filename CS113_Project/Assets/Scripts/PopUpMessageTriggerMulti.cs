@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PopUpMessageTriggerMulti : MonoBehaviour {
 
-    public bool triggered = false;
+    bool triggered = false;
     //GUIStyle style = new GUIStyle();
     //public string message;
 

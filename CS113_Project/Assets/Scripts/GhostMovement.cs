@@ -49,13 +49,15 @@ public class GhostMovement : MonoBehaviour
             if (hit && agent.remainingDistance < 0.5f) //hit and at hiding spot
             {
                 disappear_count = 0;
-                GetComponent<MeshRenderer>().enabled = true;
+                GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+                //GetComponent<MeshRenderer>().enabled = true;
                 GotoNextPoint();
                 print(goal_i);
             }
             else if (disappear_count > 75)
             {
-                GetComponent<MeshRenderer>().enabled = false;
+                //GetComponent<MeshRenderer>().enabled = false;
+                GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
                 hit = false;
             }
             if(hit)
